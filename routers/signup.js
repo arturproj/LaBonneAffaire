@@ -6,7 +6,7 @@ const multer = require("multer");
 const upload = multer({ dest: "./public/uploads/avatars/" });
 const faker = require("faker");
 
-router.get("/signup", (req, res) => {
+router.get("/", (req, res) => {
   console.log("GET /signup");
   if (req.isAuthenticated()) {
     res.redirect("/admin");
@@ -15,7 +15,7 @@ router.get("/signup", (req, res) => {
   }
 });
 
-router.post("/signup", upload.single("image"), (req, res) => {
+router.post("/", upload.single("image"), (req, res) => {
   console.log("POST /signup");
   const username = req.body.username;
   const firstname = req.body.firstname;

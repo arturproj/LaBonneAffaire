@@ -50,7 +50,7 @@ passport.serializeUser(User.serializeUser()); // Save the user.id to the session
 passport.deserializeUser(User.deserializeUser()); // Receive the user.id from the session and fetch the User from the DB by its ID
 
 
-app.use("/", signupRouter);
+app.use("/signup", signupRouter);
 
 app.get("/", (req, res) => {
   console.log("GET /");
