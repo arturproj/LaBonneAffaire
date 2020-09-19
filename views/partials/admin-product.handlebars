@@ -1,0 +1,44 @@
+<div class="card-body">
+    <header class="mb-4">
+        <h4 class="card-title">CREATE NEW PRODUCT</h4>
+    </header>
+    <form enctype="multipart/form-data" action="/account/new" method="POST">
+        <div class="form-row">
+            <div class="col-4 form-group">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text" class="form-control" placeholder="Title product">
+            </div> <!-- form-group end.// -->
+            <div class="col-3 form-group">
+                <label for="price">Price</label>
+                <input id="price" name="price" type="text" class="form-control" placeholder="Price product 10.02">
+            </div> <!-- form-group end.// -->
+            <div class="col form-group">
+                <label for="quantity">Quantity</label>
+                <input id="quantity" name="quantity" type="number" class="form-control" value="1">
+            </div> <!-- form-group end.// -->
+            <div class="col-4 form-group">
+                <label for="city">City</label>
+                <input id="city" name="city" type="text" class="form-control" placeholder="City localized">
+            </div> <!-- form-group end.// -->
+        </div> <!-- form-row end.// -->
+
+        <div class="form-row">
+            <div class="col form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Description Product" rows="4"></textarea>
+                <small class="form-text text-muted"> Maximum character is 250 letters </small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col form-group">
+                <label for="description">Upload Images</label>
+                <input id="images" name="images" type="file" multiple>
+                <small class="form-text text-muted"> images must be TYPE: PNG or JPG only </small>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary btn-block"> SAVE </button>
+        </div> <!-- form-group// -->
+
+    </form>
+</div>

@@ -1,0 +1,53 @@
+<header class="section-header">
+    <nav class="navbar navbar-main navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="/images/logo.png" class="logo"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav1"
+                aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="main_nav1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cites </a>
+                    </li>
+                </ul>
+                {{#if isUser}}
+                <div class="widget-header icontext">
+                    <div class="dropdown d-inline-block">
+                        <a href="#" class="icontext mr-4 dropdown-toggle" data-toggle="dropdown">
+                            <img class="icon icon-xs rounded-circle" src="/images/user.png">
+                            <div class="text">
+                                Hi, {{user}}
+                            </div>
+                        </a> <!-- iconbox // -->
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="/account">My profile</a>
+                            <a class="dropdown-item" href="/logout">Log out</a>
+                        </div>
+                    </div>
+                </div>
+                {{else}}
+                <div class="widget-header icontext">
+                    <a href="/account" onclick="return false;" ><img class="icon icon-xs rounded-circle" src="/images/user.png"></a>
+                    <div class="text">
+                        <span class="text-muted">Welcome!</span>
+                        <div>
+                            <a href="/login">Sign in</a> |
+                            <a href="/signup"> Register</a>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+
+            </div> <!-- collapse .// -->
+
+        </div> <!-- container .// -->
+    </nav>
+</header>

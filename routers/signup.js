@@ -1,57 +1,43 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const User = require("./../models").User; // same as: const User = require('./models/user');
-const multer = require("multer");
-const upload = multer({ dest: "./public/uploads/avatars/" });
-const faker = require("faker");
+const User = require("./../models").User;
 
 router.get("/", (req, res) => {
   console.log("GET /signup");
   if (req.isAuthenticated()) {
-    res.redirect("/admin");
+    res.redirect("/");
   } else {
     res.render("signup");
   }
 });
 
-router.post("/", upload.single("image"), (req, res) => {
-  console.log("POST /signup");
+router.post("/", (req, res) => {
+  console.log("POST /signup", req.body);
   const username = req.body.username;
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const password = req.body.password;
-  const avatar = req.file.path;
-  const faker_avatar = faker.image.avatar();
-  // console.log({
-  //   username,
-  //   firstname,
-  //   lastname,
-  //   password,
-  //   avatar,
-  //   faker_avatar,
-  // });
-  User.register(
-    new User({
-      username: username,
-      firstname: firstname,
-      lastname: lastname,
-      avatar: avatar,
-      // other fields can be added here
-    }),
-    password, // password will be hashed
-    (err, user) => {
-      if (err) {
-        console.log("/signup user register err", err);
-        return res.render("signup");
-      } else {
-        passport.authenticate("local")(req, res, () => {
-          res.redirect("/admin");
-        });
-      }
-    }
-  );
-});
+  const email = req.body.email;
+  const password =
+    req.body.password1 === req.body.password2 ? req.body.password1 : null;
 
+  if (password !== null) {
+    User.register(
+      new User({
+        username: username,
+        email: email,
+        // other fields can be added here
+      }),
+      password, // password will be hashed
+      (err, user) => {
+        if (err) {
+          console.log("/signup user register err", err);
+          res.render("signup");
+        } else {
+          console.log("/signup user register success");
+          passport.authenticate("local")(req, res, res.redirect("/login"));
+        }
+      }
+    );
+  }
+});
 
 module.exports = router;

@@ -1,8 +1,7 @@
-<form enctype='multipart/form-data' action='/signup' method='POST'>
-  <input type="text" placeholder="Firstname" name="firstname"/>
-  <input type="text" placeholder="Lastname" name="lastname"/>
-  <input type="text" placeholder="Username" name="username"/>
-  <input type="password" placeholder="Password" name="password"/>
-  <input type="file" name='image'/>
+<form action='/signup' method='POST'>
+  <input type="text" placeholder="Username" name="username" value="subcarbon"/>
+  <input type="email" placeholder="Email" name="email" autocomplete="email" value="artur.ddwebproject@gmail.com"/>
+  <input type="password" placeholder="Password" name="password1" autocomplete="new-password" value="azertyuiop"/>
+  <input type="password" placeholder="Password" name="password2" autocomplete="new-password" value="azertyuiop"/>
   <button type="submit">Submit</button>
 </form>
