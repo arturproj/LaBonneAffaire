@@ -8,12 +8,13 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models").User; // same as: const User = require('./models/user');
 
-const signupRouter = require("./routers/signup");
+const Routers = require("./routers/");
 
-const port = process.env.PORT || 3000;
-//console.log(process.env);
+const port = process.env.APP_PORT || 3000;
+
 mongoose.connect(
-  `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+  process.env.MONGO_URI ||
+    `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
   {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -24,9 +25,10 @@ mongoose.connect(
 const app = express();
 
 // Express configuration
-app.use(express.static("public"));
+
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -49,64 +51,19 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser()); // Save the user.id to the session
 passport.deserializeUser(User.deserializeUser()); // Receive the user.id from the session and fetch the User from the DB by its ID
 
-
-app.use("/signup", signupRouter);
-
-app.get("/", (req, res) => {
-  console.log("GET /");
-  res.render("home");
-});
-
-app.get("/admin", (req, res) => {
-  console.log("GET /admin");
-  if (req.isAuthenticated()) {
-    console.log(req.user);
-    res.render("admin");
-  } else {
-    res.redirect("/");
-  }
-});
-
-app.get("/login", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.redirect("/admin");
-  } else {
-    res.render("login");
-  }
-});
-
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/admin",
-    failureRedirect: "/login",
-  })
-);
-
-// Without Passport
-
-// app.post("/login", (req, res) => {
-//   const md5 = require("md5"); // there for education purpose, if using this method, put it in the top of your file
-//   User.find(
-//     {
-//       username: req.body.username,
-//       password: md5(req.body.password)
-//     },
-//     (users) => {
-//       // create a session cookie in the browser
-//       // if the password is good
-//       // and redirect to /admin
-//     }
-//   );
-//   res.send("login");
-// });
-
+app.use("/", Routers.Catalog);
+app.use("/login", Routers.Signin);
+app.use("/signup", Routers.Signup);
+app.use("/account", Routers.SpaceProtected);
 app.get("/logout", (req, res) => {
   console.log("GET /logout");
   req.logout();
   res.redirect("/");
 });
+app.get("*", (req, res) => {
+  res.send(`GET : url not found`);
+});
 
 app.listen(port, () => {
-  console.log(`Server started on : http://${process.env.HOST}:${port}/`);
+  console.log(`Server started on port: ${port}`);
 });
