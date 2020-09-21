@@ -11,19 +11,36 @@
             <div class="collapse navbar-collapse" id="main_nav1">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home </a>
+                        <a class="nav-link" href="/">Home </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cites </a>
+                        <!-- Default dropright button -->
+                        <div class="btn-group dropright">
+                            <button type="button" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"
+                                style="border: none;background-color: transparent;">
+                                Cites
+                            </button>
+                            <div class="dropdown-menu">
+                                <!-- Dropdown menu links -->
+                                <ul class="list-menu">
+                                    {{#each cites}}
+                                    <li><a href="#" class="px-2"> {{this}} </a></li>
+                                    {{else}}
+                                    <li class="px-2"> No content</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 {{#if isUser}}
                 <div class="widget-header icontext">
                     <div class="dropdown d-inline-block">
                         <a href="#" class="icontext mr-4 dropdown-toggle" data-toggle="dropdown">
-                            <img class="icon icon-xs rounded-circle" src="/images/user.png">
+                            <img class="icon icon-xs rounded-circle" src="{{user.avatar}}">
                             <div class="text">
-                                Hi, {{user}}
+                                Hi, {{user.username}}
                             </div>
                         </a> <!-- iconbox // -->
                         <div class="dropdown-menu dropdown-menu-right">
@@ -34,7 +51,8 @@
                 </div>
                 {{else}}
                 <div class="widget-header icontext">
-                    <a href="/account" onclick="return false;" ><img class="icon icon-xs rounded-circle" src="/images/user.png"></a>
+                    <a href="/account" onclick="return false;"><img class="icon icon-xs rounded-circle"
+                            src="/images/user.png"></a>
                     <div class="text">
                         <span class="text-muted">Welcome!</span>
                         <div>

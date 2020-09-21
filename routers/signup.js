@@ -1,7 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const multer = require("multer");
+const upload = multer({ dest: "./public/uploads/avatar/" });
 const User = require("./../models").User;
+
+const rWrite = (ele) => {
+  reg = new RegExp(/\\/g);
+  console.log(ele);
+  while (ele.match(reg) !== null) {
+    ele = ele.replace(reg, "/");
+  }
+  ele = ele.replace("public", "");
+  return ele; // `${ele}.${exten}`;
+};
 
 router.get("/", (req, res) => {
   console.log("GET /signup");
@@ -12,7 +24,7 @@ router.get("/", (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+router.post("/", upload.single('image'), (req, res) => {
   console.log("POST /signup", req.body);
   const username = req.body.username;
   const email = req.body.email;
@@ -22,9 +34,11 @@ router.post("/", (req, res) => {
   if (password !== null) {
     User.register(
       new User({
-        username: username,
-        email: email,
-        // other fields can be added here
+        username: req.body.username,
+        email: req.body.email,
+        avatar : rWrite(req.file.path),
+        firstname: req.body.username,
+        lastname: req.body.lastname,
       }),
       password, // password will be hashed
       (err, user) => {

@@ -1,38 +1,62 @@
 <section class="section-content bg padding-y">
     <div class="container">
+        <div class="row">
+            <div class="col-3-lg">
+                <div class="card">
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_aside1">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Cites </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_aside1">
+                            <div class="card-body">
+                                <ul class="list-menu">
+                                    {{#each cites}}
+                                    <li><a href="#"> {{this}} <span class="badge badge-pill badge-light float-right"
+                                                hidden>1</span>
+                                        </a></li>
+                                    {{else}}
+                                    <p class="empty">No content</p>
+                                    {{/each}}
+                                </ul>
 
-        {{#each articles}}
-        <article class="card card-product-list">
-            <div class="row no-gutters">
-                <aside class="col-md-3">
-                    <a href="#" class="img-wrap">
-                        {{!-- <span class="badge badge-danger"> NEW </span> --}}
-                        <img src="{{pictures.[1]}}"> 
-                    </a>
-                </aside> <!-- col.// -->
-                <div class="col-md-6">
-                    <div class="info-main">
-                        <a href="#" class="h5 title"> {{this.title}} </a>
+                            </div> <!-- card-body.// -->
+                        </div>
+                    </article>
+                </div> <!-- card.// -->
+            </div>
+            <div class=" col-9">
+                {{#each articles}}
+                <article class="card card-product-list">
+                    <div class="row no-gutters">
+                        <aside class="col-md-3 my-auto">
+                            <a href="/detail/{{_id}}" class="img-wrap">
+                                {{!-- <span class="badge badge-danger"> NEW </span> --}}
+                                <img src="{{pictures.[1]}}">
+                            </a>
+                        </aside> <!-- col.// -->
+                        <div class="col-md-9">
+                            <div class="info-main">
+                                <a href="/detail/{{_id}}" class="h5 title"> {{this.title}} </a>
 
-                        <p> {{ description }} </p>
-                    </div> <!-- info-main.// -->
-                </div> <!-- col.// -->
-                <aside class="col-sm-3">
-                    <div class="info-aside">
-                        <div class="price-wrap">
-                            <span class="price h5"> {{ price }} </span>
-                        </div> <!-- info-price-detail // -->
+                                <p> {{ description }} </p>
+                            </div> <!-- info-main.// -->
+                            <div class=" info-main">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <var class="price h4">€ {{price}} </var>
+                                    <var><a href="/detail/{{_id}}" class="price h4 btn btn-outline-info"> Details
+                                        </a></var>
+                                    </span>
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                </article>
+                {{/each}}
+            </div>
+        </div>
 
-                        <br>
-                        <p>
-                            <a href="#" class="btn btn-primary btn-block"> Details </a>
-                            <a href="#" class="btn btn-light btn-block"> Send message </a>
-                        </p>
-                    </div> <!-- info-aside.// -->
-                </aside> <!-- col.// -->
-            </div> <!-- row.// -->
-        </article>
-        {{/each}}
 
     </div> <!-- container .//  -->
 </section>
