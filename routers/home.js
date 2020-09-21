@@ -8,9 +8,18 @@ router.get("/", async (req, res) => {
     title: "All Product",
     isUser: false,
     isArticles: false,
+    cites : [],
   };
   const results = await Product.find({ hidden: false });
-  results.forEach((element,i) => results[i] = element.toObject());
+  let cites = [];
+  results.forEach((element, i) => {
+    results[i] = element.toObject();
+    cites.push(element.city.charAt(0).toUpperCase() + element.city.slice(1).toLowerCase());
+  });
+  objRender.cites = cites.filter(function (item, pos) {
+    return cites.indexOf(item) == pos;
+  });
+  console.log("Cites", cites);
   //console.log({ isArticles: true, articles: results });
 
   if (results.length > 0) {
@@ -21,8 +30,8 @@ router.get("/", async (req, res) => {
   if (req.isAuthenticated()) {
     objRender.isUser = true;
     let user = req.user.toObject();
-    objRender.user =
-      user.username.charAt(0).toUpperCase() + user.username.slice(1);
+    user.username = user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase();
+    objRender.user = user;
   }
   console.log("objRender", objRender);
   res.render("home", objRender);

@@ -55,13 +55,11 @@ app.use("/", Routers.Catalog);
 app.use("/login", Routers.Signin);
 app.use("/signup", Routers.Signup);
 app.use("/account", Routers.SpaceProtected);
+app.use("/detail", Routers.Detail);
 app.get("/logout", (req, res) => {
   console.log("GET /logout");
   req.logout();
   res.redirect("/");
-});
-app.get("*", (req, res) => {
-  res.send(`GET : url not found`);
 });
 
 app.listen(port, () => {

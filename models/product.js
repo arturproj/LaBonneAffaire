@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const prodSchema = new mongoose.Schema({
   title: String,
-  price: Number,
+  price: String,
   city: String,
   description: String,
   quantity: Number,
@@ -15,7 +15,9 @@ const prodSchema = new mongoose.Schema({
   hidden: Boolean,
   meta: {
       votes: Number,
-      favs:  Number
+      favs:  Number,
+      reviews: Number,
+      orders: Number
   }
 });
 

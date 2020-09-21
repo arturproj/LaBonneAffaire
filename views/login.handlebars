@@ -1,5 +1,20 @@
-<form action="/login" method="POST">
-  <input type="text" placeholder="Username" name="username"/>
-  <input type="password" placeholder="Password" name="password"/>
-  <button type="submit">Submit</button>
-</form>
+<div class="card col-md-4 mx-auto">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Sign in</h4>
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <label>Username</label>
+        <input class="form-control" name="username" placeholder="@username" type="text" autocomplete="username">
+      </div> <!-- form-group// -->
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" name="password" placeholder="******" type="password"
+          autocomplete="current-password">
+      </div> <!-- form-group// -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Login </button>
+      </div> <!-- form-group// -->
+    </form>
+    <p class="text-center">New here? <a href="/signup">Sign up</a></p>
+  </div> <!-- card-body.// -->
+</div>
